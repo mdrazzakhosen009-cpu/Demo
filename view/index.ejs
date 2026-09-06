@@ -1,0 +1,84 @@
+<%- include('partials/header') %>
+
+<!-- HERO: reference-inspired premium LLP landing -->
+<section class="reference-hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-arrows"><button aria-label="Previous">‹</button><button aria-label="Next">›</button></div>
+  <div class="container ref-hero-inner">
+    <div class="ref-copy">
+      <div class="ref-eyebrow">| &nbsp;Pure&nbsp; • &nbsp;Natural&nbsp; • &nbsp;Healthy</div>
+      <h1 class="ref-title">Your Health<br><span>Our Priority</span></h1>
+      <p>Discover the power of nature with LLP. Premium natural products for a healthier, brighter you.</p>
+      <a class="ref-shop-btn" href="/shop">Shop Now <b>→</b></a>
+      <div class="hero-features">
+        <div><span>✦</span><small>100% Natural</small></div><div><span>♜</span><small>Premium Quality</small></div><div><span>◇</span><small>Safe &amp; Healthy</small></div><div><span>⌁</span><small>Fast Delivery</small></div>
+      </div>
+    </div>
+    <div class="ref-product-stage">
+      <div class="natural-seal"><b>100%</b><span>NATURAL</span></div>
+      <div class="leaf leaf-a">❧</div><div class="leaf leaf-b">❧</div>
+      <img src="/assets/creative-04.jpg" alt="LLP Collagen Mix Beetroot Juice" class="ref-product-image">
+      <div class="ref-bn">প্রকৃতির শক্তি<br>এখন আপনার<br>প্রতিদিনের সঙ্গী<small>LLP - Long Life Products</small></div>
+      <div class="hero-scroll">⌄</div>
+    </div>
+  </div>
+</section>
+
+<!-- CATEGORY STRIP -->
+<section class="category-strip container">
+  <a href="/shop?category=Wellness"><span class="cat-icon">♧</span><b>Health Drinks</b></a>
+  <a href="/shop"><span class="cat-icon">◌</span><b>Beauty &amp; Glow</b></a>
+  <a href="/shop"><span class="cat-icon">⌾</span><b>Weight Management</b></a>
+  <a href="/shop"><span class="cat-icon">✧</span><b>Immunity Boost</b></a>
+  <a href="/shop"><span class="cat-icon">❧</span><b>Natural Wellness</b></a>
+</section>
+
+<!-- PRODUCTS -->
+<section class="reference-products" id="products">
+  <div class="container">
+    <div class="ref-section-head"><div><div class="ref-kicker">OUR PREMIUM PRODUCTS</div><h2>Pure nutrition for a healthier tomorrow</h2></div><a href="/shop" class="ref-outline">View All Products&nbsp; →</a></div>
+    <div class="reference-product-grid">
+      <% products.forEach((p,i)=>{ %>
+        <article class="ref-card">
+          <a class="ref-card-img" href="/product/<%= p.id %>"><img src="<%= p.image || '/assets/creative-01.jpg' %>" alt="<%= p.name %>"><span>0<%= i+1 %></span></a>
+          <div class="ref-card-body">
+            <h3><%= p.name %></h3>
+            <div class="ref-price"><%= settings.currency || '৳' %><%= Number(p.price||0).toLocaleString('en-BD') %> <% if(Number(p.old_price||0)>Number(p.price||0)){ %><del><%= settings.currency || '৳' %><%= Number(p.old_price).toLocaleString('en-BD') %></del><% } %></div>
+            <form method="post" action="/cart/add"><input type="hidden" name="id" value="<%= p.id %>"><button>Add to Cart</button></form>
+          </div>
+        </article>
+      <% }) %>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT / WHY / AGENT: same three-panel composition -->
+<section class="reference-lower" id="about-store">
+  <div class="container lower-grid">
+    <article class="about-panel">
+      <div class="ref-kicker">ABOUT LLP</div><h2>Natural Goodness,<br>Better Living</h2>
+      <p><%= settings.store_info || 'LLP — Long Life Products brings carefully selected products for a healthier, happier everyday life.' %></p>
+      <a href="#store-story" class="ref-outline">Learn More&nbsp; →</a>
+      <div class="about-orb"><img src="/assets/llp-logo-circle.png" alt="LLP"><small>Waugh Our Story</small></div>
+    </article>
+    <article class="why-panel"><div class="ref-kicker">WHY CHOOSE LLP?</div>
+      <div class="why-item"><i>♧</i><span><b>100% Natural Ingredients</b><small>No harmful chemicals</small></span></div>
+      <div class="why-item"><i>◇</i><span><b>Premium Quality</b><small>Trusted products</small></span></div>
+      <div class="why-item"><i>⌁</i><span><b>Fast &amp; Secure Delivery</b><small>All over Bangladesh</small></span></div>
+      <div class="why-item"><i>⌕</i><span><b>Customer Support</b><small>Always here for you</small></span></div>
+    </article>
+    <article class="agent-preview">
+      <div class="agent-preview-head"><span class="agent-avatar"><span>✦</span></span><div><b>LLP Shopping Agent</b><small><em></em> Online</small></div><button onclick="openChat()">×</button></div>
+      <div class="agent-welcome">Hello! 👋<br>I’m your LLP shopping assistant. I can help you find products, answer questions, place orders and track your delivery.</div>
+      <div class="agent-quick"><button onclick="askAgent('Product দেখাও')">Show Products</button><button onclick="askAgent('Recommend করো')">Best Recommendation</button><button onclick="askAgent('Delivery কতদিন?')">Delivery Info</button><button onclick="askAgent('Order করতে চাই')">Order</button><button onclick="askAgent('আমার order track করতে চাই')">Track Order</button><button onclick="askAgent('Payment information দাও')">Payment Methods</button></div>
+      <button class="agent-compose" onclick="openChat()">Type your message... <span>➤</span></button>
+    </article>
+  </div>
+</section>
+
+<section class="story-section" id="store-story">
+  <div class="container story-grid"><div><div class="ref-kicker">OUR STORY</div><h2>About Our Store</h2></div><p><%= settings.store_info || 'Admin Panel থেকে store সম্পর্কে লেখা information এখানে দেখা যাবে।' %></p></div>
+</section>
+
+<%- include('partials/footer') %>
